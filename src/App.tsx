@@ -70,18 +70,23 @@ const App = () => {
           Test Your Video Game Knowledge!
         </h1>
         <div className="ui segment">
-          {gameOver || userAnswers.length === totalQuestions ? (
+          {gameOver ? (
             <button className="ui blue button" onClick={startQuiz}>
               Start Quiz
             </button>
           ) : null}
-          {!gameOver ? <h2>Score: {score}</h2> : null}
+          {userAnswers.length === totalQuestions ? (
+            <button className="ui blue button" onClick={startQuiz}>
+              Retry Quiz
+            </button>
+          ) : null}
           {loading ? (
             <div className="ui">
               <div className="ui active loader"></div>
               <p></p>
             </div>
           ) : null}
+          {!gameOver ? <h2>Score: {score}</h2> : null}
           {!loading && !gameOver ? (
             <QuestionCard
               questionNumber={number + 1}
@@ -100,7 +105,7 @@ const App = () => {
               className="ui right labeled icon button"
               onClick={nextQuestion}
             >
-              <i className="right arrow icon"></i> Next Question!
+              <i className="right arrow icon"></i> Next Question
             </button>
           ) : null}
         </div>
