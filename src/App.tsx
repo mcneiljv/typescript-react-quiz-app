@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { QuestionState, Answers, Difficulty, fetchQuestions } from "./api";
-
-// Components
 import QuestionCard from "./Components/QuestionCard";
+
+import "./App.css";
 
 const totalQuestions = 10;
 
@@ -64,29 +64,47 @@ const App = () => {
   };
 
   return (
-    <div>
-      <h1>TypeScript React Quiz</h1>
-      {gameOver || userAnswers.length === totalQuestions ? (
-        <button onClick={startQuiz}>Start Quiz!</button>
-      ) : null}
-      {!gameOver ? <p>Score: {score}</p> : null}
-      {loading ? <p>Loading Questions...</p> : null}
-      {!loading && !gameOver ? (
-        <QuestionCard
-          questionNumber={number + 1}
-          totalQuestions={totalQuestions}
-          question={questions[number].question}
-          answers={questions[number].answers}
-          userAnswer={userAnswers ? userAnswers[number] : undefined}
-          callback={checkAnswer}
-        />
-      ) : null}
-      {!loading &&
-      !gameOver &&
-      userAnswers.length === number + 1 &&
-      number !== totalQuestions - 1 ? (
-        <button onClick={nextQuestion}>Next Question!</button>
-      ) : null}
+    <div className="ui container">
+      <div className="ui segments">
+        <h1 className="ui center aligned header">
+          Test Your Video Game Knowledge!
+        </h1>
+        <div className="ui segment">
+          {gameOver || userAnswers.length === totalQuestions ? (
+            <button className="ui blue button" onClick={startQuiz}>
+              Start Quiz
+            </button>
+          ) : null}
+          {!gameOver ? <h2>Score: {score}</h2> : null}
+          {loading ? (
+            <div className="ui">
+              <div className="ui active loader"></div>
+              <p></p>
+            </div>
+          ) : null}
+          {!loading && !gameOver ? (
+            <QuestionCard
+              questionNumber={number + 1}
+              totalQuestions={totalQuestions}
+              question={questions[number].question}
+              answers={questions[number].answers}
+              userAnswer={userAnswers ? userAnswers[number] : undefined}
+              callback={checkAnswer}
+            />
+          ) : null}
+          {!loading &&
+          !gameOver &&
+          userAnswers.length === number + 1 &&
+          number !== totalQuestions - 1 ? (
+            <button
+              className="ui right labeled icon button"
+              onClick={nextQuestion}
+            >
+              <i className="right arrow icon"></i> Next Question!
+            </button>
+          ) : null}
+        </div>
+      </div>
     </div>
   );
 };
