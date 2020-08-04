@@ -1,0 +1,14 @@
+.ui.container,
+.ui.right.labeled.icon.button {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+h1.ui.center.aligned.header {
+  margin-top: 0.5rem;
+}
+
+.ui.blue.button {
+  display: block;
+  margin: 0 auto;
+}
